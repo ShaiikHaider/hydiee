@@ -1,0 +1,36 @@
+import java.util.*;
+import javax.crypto.*;
+import javax.crypto.spec.*;
+import java.util.Base64;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter message: ");
+        String msg = sc.nextLine();
+
+        System.out.print("Enter key: ");
+        String keyStr = sc.nextLine();
+
+        // make key length 24
+        keyStr = (keyStr + "123456789012345678901234").substring(0, 24);
+
+        SecretKey key = SecretKeyFactory.getInstance("DESede")
+                .generateSecret(new DESedeKeySpec(keyStr.getBytes()));
+
+        Cipher c = Cipher.getInstance("DESede");
+
+        // encrypt
+        c.init(Cipher.ENCRYPT_MODE, key);
+        byte[] enc = c.doFinal(msg.getBytes());
+
+        // decrypt
+        c.init(Cipher.DECRYPT_MODE, key);
+        byte[] dec = c.doFinal(enc);
+
+        System.out.println("Encrypted: " + Base64.getEncoder().encodeToString(enc));
+        System.out.println("Decrypted: " + new String(dec));
+    }
+}
