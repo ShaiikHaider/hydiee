@@ -1,0 +1,23 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter string: ");
+        String str = sc.nextLine();
+
+        System.out.print("AND with 127: ");
+        for (int i = 0; i < str.length(); i++) {
+            char c = (char)(str.charAt(i) & 127);
+            System.out.print(c);
+        }
+
+        System.out.print("\nXOR with 127: ");
+        for (int i = 0; i < str.length(); i++) {
+            char c = (char)(str.charAt(i) ^ 127);
+            System.out.print(c);
+        }
+    }
+}
