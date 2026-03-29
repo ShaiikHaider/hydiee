@@ -1,0 +1,27 @@
+import java.util.*;
+import javax.crypto.*;
+import java.util.Base64;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter text: ");
+        String text = sc.nextLine();
+
+        SecretKey key = KeyGenerator.getInstance("Blowfish").generateKey();
+        Cipher c = Cipher.getInstance("Blowfish");
+
+        // encrypt
+        c.init(Cipher.ENCRYPT_MODE, key);
+        byte[] enc = c.doFinal(text.getBytes());
+
+        // decrypt
+        c.init(Cipher.DECRYPT_MODE, key);
+        byte[] dec = c.doFinal(enc);
+
+        System.out.println("Encrypted: " + Base64.getEncoder().encodeToString(enc));
+        System.out.println("Decrypted: " + new String(dec));
+    }
+}
