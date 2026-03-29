@@ -1,0 +1,23 @@
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter p, g, a, b: ");
+        int p = sc.nextInt();
+        int g = sc.nextInt();
+        int a = sc.nextInt();
+        int b = sc.nextInt();
+
+        int A = (int)Math.pow(g, a) % p;
+        int B = (int)Math.pow(g, b) % p;
+
+        int key1 = (int)Math.pow(B, a) % p;
+        int key2 = (int)Math.pow(A, b) % p;
+
+        System.out.println("Public keys: A=" + A + ", B=" + B);
+        System.out.println("Shared keys: " + key1 + " , " + key2);
+    }
+}
